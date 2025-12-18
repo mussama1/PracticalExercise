@@ -1,5 +1,6 @@
 package api;
 import io.restassured.RestAssured;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -18,8 +19,6 @@ public class JsonPlaceholderPostTest {
         RestAssured.baseURI = BASE_URL;
     }
 
-    // ==================== POSITIVE TEST CASES ====================
-
     /**
      * Test 1: Verify single post data with all validations
      * - Status code
@@ -29,18 +28,25 @@ public class JsonPlaceholderPostTest {
      */
     @Test(priority = 1, description = "Verify GET /posts/1 returns correct data")
     public void verifyGetSinglePost() {
-        given()
-                .log().uri()                          // Log the request URL
-                .when()
-                .get(POSTS_ENDPOINT + "/1")
-                .then()
-                .log().status()                       // Log response status
-                .statusCode(200)                      // Verify status code
-                .time(lessThan((long) RESPONSE_TIME_LIMIT_MS))  // Verify response time
-                .contentType("application/json")      // Verify content type
-                .body("id", equalTo(1))               // Verify id
-                .body("userId", equalTo(1))           // Verify userId
-                .body("title", notNullValue())        // Verify title exists
-                .body("body", notNullValue());        // Verify body exists
+        try {
+            given() // SETUP - Prepare the request
+                    .log().uri()                          // Log the request URL
+                    .when()//action send the request
+                    .get(POSTS_ENDPOINT + "/1")
+                    .then()
+                    .log().status()                       // Log response status
+                    .statusCode(200)                      // Verify status code
+                    .time(lessThan((long) RESPONSE_TIME_LIMIT_MS))  // Verify response time
+                    .contentType("application/json")      // Verify content type
+                    .body("id", equalTo(1))               // Verify id
+                    .body("userId", equalTo(1))           // Verify userId
+                    .body("title", notNullValue())        // Verify title exists
+                    .body("body", notNullValue());        // Verify body exists
+        }
+        catch (Exception ex) {
+            // Error handling
+            System.out.println("Something went wrong while calling the API: " + ex.getMessage());
+            Assert.fail("Test failed due to an error...");
+        }
     }
 }
