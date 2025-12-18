@@ -2,7 +2,7 @@
 <suite name="API Suite">
     <test name="Get Post Test">
         <classes>
-            <class name="api.GetPostTest"/>
+            <class name="api.JsonPlaceholderPostTest"/>
         </classes>
     </test>
 </suite>
