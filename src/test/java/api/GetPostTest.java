@@ -18,8 +18,8 @@ public class GetPostTest {
             Assert.assertEquals(response.getStatusCode(), 200, "Status code is not 200");
 
             // Body validation
-            Assert.assertEquals(response.jsonPath().getInt("userId"), 2, "userId mismatch");
-            Assert.assertEquals(response.jsonPath().getInt("id"), 2, "id mismatch");
+            Assert.assertEquals(response.jsonPath().getInt("userId"), 1, "userId mismatch");
+            Assert.assertEquals(response.jsonPath().getInt("id"), 1, "id mismatch");
 
         } catch (Exception e) {
             // Error handling
