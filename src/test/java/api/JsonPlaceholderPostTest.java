@@ -38,7 +38,7 @@ public class JsonPlaceholderPostTest {
                     .statusCode(200)                      // Verify status code
                     .time(lessThan((long) RESPONSE_TIME_LIMIT_MS))  // Verify response time
                     .contentType("application/json")      // Verify content type
-                    .body("id", equalTo(1))               // Verify id
+                    .body("id", equalTo(2))               // Verify id
                     .body("userId", equalTo(1))           // Verify userId
                     .body("title", notNullValue())        // Verify title exists
                     .body("body", notNullValue());        // Verify body exists
